@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+
+{% block title %} Edit{{ item.name }}{% endblock %}
+
+{% block page_content %}
+
+<style> 
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    text-align: center; /* Center-align the title */
+}
+
+/* Form styling */
+#edit-item-form {
+    max-width: 800px;
+    margin: 0 auto; /* Center align the form */
+    padding: 20px;
+    background-color: #f8f9fa;  /* Light grey background for the form */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Label styling */
+label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    display: block; /* Make labels block-level */
+    margin-bottom: 5px;
+}
+
+/* Input and textarea styling */
+.form-control {
+    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    background-color: #fff;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Button Styling */
+button.btn-primary, a.btn-secondary {
+    background-color: #dde5b6;  /* Accent color for buttons */
+    color: #333;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; /* Space between buttons */
+    display: inline-block;
+}
+
+button.btn-primary:hover, a.btn-secondary:hover {
+    background-color: #d0db8b; /* Slightly darker shade on hover */
+}
+
+/* Discard Changes Button */
+a.btn-secondary {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+a.btn-secondary:hover {
+    background-color: #e2e6ea;  /* Light grey background on hover */
+    color: #007bff; /* Blue text on hover */
+}
+
+
+</style>
+
+
+<div class="container">
+    <h2>Edit Item</h2>
+
+<form id="edit-item-form"  data-item-id="{{ item.id }}">
+    <div class="form-group">
+        <label for="name">Location Name:</label>
+        <input type="text" id="name" class="form-control" name="name" value="{{ item.name }}" placeholder="Location Name">
+    </div>
+
+    <div class="form-group">
+        <label for="image">Image Link:</label>
+        <input type="text" id="image" class="form-control" name="image" value="{{ item.image }}" placeholder="Image Link">
+    </div>
+
+    <div class="form-group">
+        <label for="rating">Location Rating:</label>
+        <input type="number" id="rating" class="form-control" name="rating" value="{{ item.rating}}" placeholder="Rating" min="1" max="5" step="0.1">
+    </div>
+
+    <div class="form-group">
+        <label for="address">Location Address:</label>
+        <input type="text" id="address" class="form-control" name="address" value="{{ item.address}}" placeholder="Location Address">
+    </div>
+
+    <div class="form-group">
+        <label for="overview">Location Overview:</label>
+        <textarea id="overview" class="form-control" name="overview" placeholder="Location Overview">{{ item.overview }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="matcha">Matcha Drinks (separate with commas):</label>
+        <input type="text" id="matcha" class="form-control" name="matcha" value = "{{item.matcha|join(', ')}}" placeholder="Matcha Drinks">
+    </div>
+
+    <div class="form-group">
+        <label for="other">Other Drinks (separate with commas):</label>
+        <input type="text" id="other" class="form-control" name="other" value="{{item.other|join(', ')}}" placeholder="Other Drinks">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="{{ url_for('view_item', id=item.id) }}" class="btn btn-secondary" onclick="return confirm('Are you sure you want to discard changes?')">Discard Changes</a>
+</form>
+</div>
+
+{% endblock %}

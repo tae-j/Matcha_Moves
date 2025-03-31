@@ -1,0 +1,212 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block page_content %}
+
+<style> 
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    text-align: left; 
+}
+
+/* Left Side - Image, Location, Rating */
+.left-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.image-location-rating img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image-location-rating p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Make the "Location:" and "Rating:" bold */
+.image-location-rating p strong {
+    font-weight: bold;
+}
+
+/* Edit button styling */
+.edit-button-container {
+    margin-top: 25px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d;
+    opacity: 0.7;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.6rem;
+}
+
+.btn-outline-secondary:hover {
+    opacity: 1;
+    color: #fff;
+    background-color: #6c757d;
+}
+
+/* Right Side - Overview, Menu Section */
+.right-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Overview section at the top right */
+.overview {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Make the "Overview" title bold */
+.overview h3 {
+    font-weight: bold;
+}
+
+/* Drinks container */
+.drinks-container {
+    margin-top: 20px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Menu column styles */
+.menu-column {
+    margin-bottom: 20px;
+}
+
+.menu-column h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: bold; /* Bold titles like "Matcha Drinks" and "Specialty Drinks" */
+}
+
+.menu-column ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-column li {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    padding-left: 5px;
+}
+
+/* Button for Similar Places - Accent Color */
+.card-body .btn-primary {
+    background-color: #dde5b6; 
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.card-body .btn-primary:hover {
+    background-color: #c3cfae; 
+    color: #333;
+}
+    </style>
+
+
+<div class="container">
+    <div class="row">
+
+        <h1> {{item.name}}</h1>
+
+        <!-- Left Side - Image, Location, Rating -->
+        <div class="col-md-6 left-side">
+            <div class="image-location-rating">
+                <img src="{{ item.image }}" class="img-fluid" alt="{{ item.name }}">
+                <p><strong>Location:</strong> {{ item.address}}</p>
+                <p><strong>Rating:</strong> {{ item.rating }}</p>
+                
+                <!-- Edit button added here with spacing -->
+                <div class="edit-button-container">
+                    <button type="button" onclick="window.location.href='{{ url_for('edit_item', id=item.id) }}';" class="btn btn-outline-secondary btn-sm">
+                        Edit Item
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Overview, Matcha Drinks, and Specialty Drinks -->
+        <div class="col-md-6 right-side">
+            <!-- Overview at the top right -->
+            <div class="overview">
+                <h3>Overview</h3>
+                <p>{{ item.overview }}</p>
+            </div>
+
+            <!-- Matcha Drinks and Specialty Drinks side by side -->
+            <div class="row drinks-container">
+                <div class="col-md-6">
+                    <div class="menu-column">
+                        <h3>Matcha Drinks</h3>
+                        <ul>
+                            {% for drink in item.matcha %}
+                                <li>{{ drink }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-column">
+                        <h3>Specialty Drinks</h3>
+                        <ul>
+                            {% for drink in item.other %}
+                                <li>{{ drink }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if similar_places %}
+    <div class="row mt-4">
+       <div class="col-12">
+           <h3>Similar Places</h3>
+           <div class="row">
+               {% for place in similar_places %}
+               <div class="col-md-4 mb-3">
+                   <div class="card">
+                       <img src="{{ place.image }}" class="card-img-top" alt="{{ place.name }}">
+                       <div class="card-body">
+                           <h5 class="card-title">{{ place.name }}</h5>
+                           <a href="/view/{{ place.id }}" class="btn btn-primary">View Details</a>
+                       </div>
+                   </div>
+               </div>
+               {% endfor %}
+           </div>
+       </div>
+    </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}
+

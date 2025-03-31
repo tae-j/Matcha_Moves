@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+
+{% block title %}Search Results{% endblock %}
+
+
+{% block page_content %}
+
+<style>
+
+    h2{
+        margin-top: 20px; 
+    }
+    
+    .lead {
+        font-size: 1.2rem;  
+        color: #333;  
+        margin-bottom: 15px;
+        font-weight: 600; 
+        line-height: 1.5; 
+    }
+    
+    .lead strong {
+        color: #007bff;  
+        font-weight: 700; 
+    }
+    
+    
+    .lead, .lead strong {
+        transition: color 0.3s ease;
+    }
+    
+    
+    .container p {
+        margin-bottom: 20px;
+        font-size: 1.1rem;  
+        color: #555;  
+    }
+    
+    .list-group-item-action {
+        transition: background-color 0.2s;
+    }
+    
+    .list-group-item-action:hover {
+        background-color: #f8f9fa;
+    }
+    
+    
+    .highlight {
+        background-color: yellow;
+        font-weight: bold;
+        border-radius: 3px; 
+       }
+    </style>
+
+
+
+<div class="container">
+   <h2>Search Results</h2>
+  
+   {% if query %}
+       <p>Showing results for "{{ query }}"</p>
+       <p>Number of results "{{results | length}}"</p>
+   {% endif %}
+
+
+   {% if results %}
+       <div class="list-group">
+           {% for item in results %}
+               {% if item.match_name %}
+               <!-- Always show the name -->
+               <a href="/view/{{ item.id }}" class="list-group-item list-group-item-action">
+                   {{ item.name | highlight(query) | safe}}
+               </a>
+               {% endif %}
+
+
+               <!-- Only show overview if it matches -->
+               {% if item.match_overview %}
+               <a href="/view/{{ item.id }}" class="list-group-item list-group-item-action">
+                   {{ item.overview | highlight(query) | safe}}
+               </a>
+               {% endif %}
+
+
+               <!-- Only show matcha drinks if they match -->
+               {% if item.match_matcha %}
+               <a href="/view/{{ item.id }}" class="list-group-item list-group-item-action">
+                   {{ item.matcha | join(', ') |highlight(query) | safe}}
+               </a>
+               {% endif %}
+
+
+               <!-- Only show other drinks if they match -->
+               {% if item.match_other %}
+               <a href="/view/{{ item.id }}" class="list-group-item list-group-item-action">
+                   {{ item.other | join(', ') | highlight(query) | safe }}
+               </a>
+               {% endif %}
+           {% endfor %}
+       </div>
+   {% else %}
+       <p>No results found.</p>
+   {% endif %}
+</div>
+
+{% endblock %}

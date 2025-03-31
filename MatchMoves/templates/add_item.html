@@ -1,0 +1,165 @@
+{% extends "layout.html" %}
+
+{% block title %}Add New Item{% endblock %}
+
+{% block page_content %}
+
+<style> 
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    text-align: center; /* Center-align the title */
+}
+
+/* Form styling */
+#add-item-form {
+    max-width: 800px;
+    margin: 0 auto; /* Center align the form */
+    padding: 20px;
+    background-color: #f8f9fa;  /* Light grey background for the form */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Label styling */
+label.box {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    display: block; /* Make labels block-level */
+    margin-bottom: 5px;
+}
+
+/* Input and textarea styling */
+.form-control {
+    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    background-color: #fff;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Error message styling */
+.form-text.text-danger {
+    font-size: 0.875rem;
+    color: #dc3545;
+}
+
+/* Button styling */
+button.button {
+    background-color: #dde5b6;  /* Accent color */
+    color: #333;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Full width button */
+    margin-top: 15px;
+}
+
+/* Button hover effect */
+button.button:hover {
+    background-color: #d0db8b; /* Slightly darker shade on hover */
+}
+
+/* Success message styling */
+#success-message {
+    margin-top: 15px;
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+#success-message a {
+    /* color: #007bff; */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Focus style for accessibility (inputs and buttons) */
+input:focus, textarea:focus, button:focus {
+    outline: none;
+    box-shadow: 0 0 3px 2px rgba(0, 123, 255, 0.5); /* Blue outline for better visibility */
+}
+
+
+</style>
+
+
+
+<div class="container">
+    <h2>Add a New Item</h2>
+
+    <form id="add-item-form">
+
+        <div id="success-message" class="mt-3" style="display: none;">
+            <p class = "success" >New item successfully created.</p>
+            <a id="view-link" href="#" class="btn btn-success">See it here</a>
+        </div>
+
+        <div class="form-group">
+            <label for="name" class = "box">Location Name:</label>
+            <input type="text" id="name" class="form-control" name="name" placeholder="Location Name">
+            <small id="name-error" class="form-text text-danger"></small> 
+        </div>
+
+        <div class="form-group">
+            <label for="image" class = "box">Image Link:</label>
+            <input type="text" id="image" class="form-control" name="image" placeholder="Image Link">
+            <small id="image-error" class="form-text text-danger"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="rating" class = "box">Location Rating:</label>
+            <input type="number" id="rating" class="form-control" name="rating" placeholder="Rating" min="1" max="5" step="0.1" >
+            <small id="rating-error" class="form-text text-danger"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="address" class = "box">Location Address:</label>
+            <input type="text" id="address" class="form-control" name="address" placeholder="Location Address">
+            <small id="address-error" class="form-text text-danger"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="overview" class = "box">Location Overview:</label>
+            <textarea id="overview" class="form-control" name="overview" placeholder="Location Overview"></textarea>
+            <small id="overview-error" class="form-text text-danger"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="matcha" class = "box">Matcha Drinks (separate with commas):</label>
+            <input type="text" id="matcha" class="form-control" name="matcha" placeholder="Matcha Drinks">
+            <small id="matcha-error" class="form-text text-danger"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="other" class = "box ">Other Drinks (separate with commas):</label>
+            <input type="text" id="other" class="form-control" name="other" placeholder="Other Drinks">
+            <small id="other-error" class="form-text text-danger"></small>
+        </div>
+
+        <!-- btn btn-primary -->
+        <button type="submit" class="button">Submit</button>
+    </form>
+</div>
+
+
+{% endblock %}

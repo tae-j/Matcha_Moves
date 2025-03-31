@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+
+{% block title %}Home - MatchaMoves{% endblock %}
+
+{% block page_content %}
+
+
+<style>
+:root {
+  --base-color: #adc178;
+  --accent-color: #dde5b6; 
+  --light-grey: #f2f2f2;
+  --dark-grey: #4a4a4a;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--light-grey);
+  color: var(--dark-grey);
+  line-height: 1.6;
+}
+
+/* Header styling - assuming your template has a header in layout.html */
+header {
+  background-color: var(--base-color);
+  padding: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Main content container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Intro Group Styling */
+#introGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 0;
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+#introGroup img {
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+}
+
+#introGroup h1 {
+  font-size: 3rem;
+  color: var(--dark-grey);
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+#introGroup p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  text-align: center;
+  margin: 1rem auto;
+  padding: 0 1rem;
+}
+
+/* Popular Items Section */
+#popular-items {
+  background-color: var(--accent-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+#popular-items h1 {
+  font-size: 2.5rem;
+  color: var(--dark-grey);
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+#popular-items h1::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--base-color);
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+/* Bootstrap adjustments */
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.col-12 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+</style>
+
+
+<div id = "introGroup" > 
+    <img src = "https://i.pinimg.com/736x/cb/b9/1f/cbb91f2d6599888ad92495f6b3aaa2b4.jpg" alt = "Matcha in a Cup"> 
+    <h1> MatchaMoves</h1>
+    <p> MatchaMoves brings you the quick and easy experiencing of finding the best matcha in NYC! 
+        With just the click of a button, various locations selling matcha will show. While our main
+        focus is matcha, we provide a variety of other drinks. Have a tasty experience! 
+    </p>
+</div>
+
+<div id="popular-items" class="row">
+    <div class="row">
+        <div class="col-12">
+            <h1>Popular Items</h1>
+        </div>
+    </div>
+    <!-- items go here-->
+</div>
+
+
+{% endblock %}
